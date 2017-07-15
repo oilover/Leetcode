@@ -34,6 +34,7 @@ class Graph:   #directed graph
 			self.V[u] = {}
 		if not v in self.V2:
 			self.V2[v] = {}
+		edge['ID'] = len(self.E)
 		self.V[u].append(edge) #{'from':u, 'to':v, 'time':t, color':color}
 	#	self.V[v].add(edge) #{'from':v, 'to':u, 'color':color}
 		self.V2[v].append(edge)

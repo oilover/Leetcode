@@ -1,6 +1,14 @@
 from DualSim import *
 from Queue import Queue
 INF = 1e12
+
+def reverseG(G):
+	G2 = {}
+	for u in G:
+		for v in G[u]:
+			if not v in G2: G2[v] = set()
+			G2[v].add(u)
+
 def match_relation(S): # Construct edge match relation 𝑆𝑒 &
 # match graph 𝐺𝑚 from 𝑆
 	# S is vertex match
@@ -34,6 +42,7 @@ def DDST(G, Q, w): # 𝒢: graph stream,\
 	top_order = TopSort(Q.timing_order)
 	ts = {}
 	for x in range(Q.NE()): ts[x] = -1e7
+	rsimE = reverseG(simE)
 	while True:
 		change = false
 		for eQ in top_order:
@@ -46,6 +55,10 @@ def DDST(G, Q, w): # 𝒢: graph stream,\
 					Min = min(Min, eG['time'])
 				else:
 					simE[eQ].remove(eG)
+					rsimE[eG].remove(eQ)
+					if len(rsimE[eG])==0:
+						subG.remove(eG)
+					change = True 
 			ts[eQ] = Min
 		for eQ in top_order[::-1]:
 			lim = INF
@@ -57,8 +70,12 @@ def DDST(G, Q, w): # 𝒢: graph stream,\
 					Max = max(Max, eG['time'])
 				else:
 					simE[eQ].remove(eG)
+					rsimE[eG].remove(eQ)
+					if len(rsimE[eG])==0:
+						subG.remove(eG)
+					change = True 
 			ts[eQ] = Max
-
+			
 		if not change: break
 		
 
