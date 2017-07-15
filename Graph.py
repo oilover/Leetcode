@@ -1,5 +1,15 @@
 # enconding = utf-8
 
+
+def E2G(E): # Construct Graph from set of edges(pair) 
+	G = {}
+	for e in E:
+		u , v = e[0], e[1]
+		if not u in G:
+			G[u] = []
+		G[u].append(v)
+	return G
+
 class Graph:   #directed graph
 	def __init__(self):
 		self.V = {} 
@@ -7,6 +17,13 @@ class Graph:   #directed graph
 		self.E = []
 		#self.adj = {}
 		self.L = {}  # label of nodes
+		self.timing_order = set() # set of pairs (e1,e2) mean e1 should be earlier than e2
+
+	def NE(self): #number of edges
+		return len(self.E)
+
+	def NV(self):
+		return len(self.V)
 
 	def addEdge(self, edge):
 		#self.V.add(u)
@@ -22,3 +39,5 @@ class Graph:   #directed graph
 		self.V2[v].append(edge)
 		self.E.append(edge)
 		
+	def postProcess(self):
+		pass

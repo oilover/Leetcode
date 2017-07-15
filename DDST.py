@@ -1,11 +1,104 @@
 from DualSim import *
-
+from Queue import Queue
+INF = 1e12
 def match_relation(S): # Construct edge match relation 𝑆𝑒 &
 # match graph 𝐺𝑚 from 𝑆
 	# S is vertex match
+	pass
 
+def TopSort(G):
+	indegree = {}
+	for v in G: indegree[v] = 0
+	Q = Queue()
+	for v in G:
+		for u in G[v]:
+			if not u in indegree : indegree[u]=0
+			indegree[u]+=1
+	for u in indegree:
+		if indegree[u]==0:
+			Q.put(u)
+	order = []
+	while not Q.empty():
+		u = Q.get()
+		order.append(u)
+		for v in G[u]:
+			indegree[v]-=1
+			if indegree[v]==0:
+				Q.put(v)
+	return order
 
 def DDST(G, Q, w): # 𝒢: graph stream,\
 # 𝒬: query graph, 𝑤: window size
-	S = DualSim(Q,G)
-	
+	Sv, sim = DualSim(Q,G)
+	simE, subG = V2EMatch(Q,G,sim)
+	top_order = TopSort(Q.timing_order)
+	ts = {}
+	for x in range(Q.NE()): ts[x] = -1e7
+	while True:
+		change = false
+		for eQ in top_order:
+			lim = -1e7 #lower bound
+			for preEQ in Q.V2[eQ]:
+				lim = max(lim, ts[preEQ])
+			Min = 1e9
+			for eG in simE[eQ]:
+				if eG['time'] > lim:
+					Min = min(Min, eG['time'])
+				else:
+					simE[eQ].remove(eG)
+			ts[eQ] = Min
+		for eQ in top_order[::-1]:
+			lim = INF
+			for postEQ in Q.V[eQ]:
+				lim = min(lim, ts[postEQ])
+			Max = -INF
+			for eG in simE[eQ]:
+				if eG['time'] < lim:
+					Max = max(Max, eG['time'])
+				else:
+					simE[eQ].remove(eG)
+			ts[eQ] = Max
+
+		if not change: break
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

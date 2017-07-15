@@ -39,9 +39,9 @@ def DualSim(Q, G):
 			if len(sim[v])==0 : return set()
 		if not change: break
 
-	S_e		
-	S_w = set()
+		
+	Sv = set()
 	for v in Q.V:
 		for u in sim[v]:
-			S_w.add((v,u))
-	return S_w, sim
+			Sv.add((v,u))
+	return Sv, sim
