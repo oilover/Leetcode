@@ -35,6 +35,38 @@ def TopSort(G):
 				Q.put(v)
 	return order
 
+block = {} # which connected component belong to 
+CC = {} # connected component 
+def D2U(G): # directed graph to undirected
+	if G.type==UNDIRECTED: return G
+	UG = Graph()
+	for edge in G.E:
+		UG.addEdge(edge);
+		e = edge 
+		e['from'],e['to'] = edge['to'],e['from']
+		UG.addEdge(e);
+	return UG
+
+def dfs(G, u, b):
+	block[u] = b
+	if not b in CC:
+		CC[b] = set()
+	CC[b].add(u)
+	for e in G[u]:
+		v = e['to']
+		if not v in block:
+			dfs(G, v, b)
+
+def get_connected_component(G):
+	block = {}
+	if G.type==DIRECTED:
+		G = D2U(G)
+	b = 1
+	for u in G.V:
+		if not u in block:
+			dfs(G, u, b)
+	return CC
+
 def DDST(G, Q, w): # 𝒢: graph stream,\
 # 𝒬: query graph, 𝑤: window size
 	Sv, sim = DualSim(Q,G)
@@ -75,46 +107,10 @@ def DDST(G, Q, w): # 𝒢: graph stream,\
 						subG.remove(eG)
 					change = True 
 			ts[eQ] = Max
-			
+
 		if not change: break
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			
+	return 	subG, simE
 
 
 

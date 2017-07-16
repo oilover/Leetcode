@@ -1,5 +1,5 @@
 
-from Graph import Graph
+from Graph import *
 
 def DualSim(Q, G):
 	sim = {}

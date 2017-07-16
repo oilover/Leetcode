@@ -1,4 +1,4 @@
-from Graph import Graph
+from Graph import *
 def V2EMatch(Q, G, sim):
 	simE = {}
 	#Se = set()
@@ -19,4 +19,4 @@ def V2EMatch(Q, G, sim):
 					simE[ID_Q].add(ID_G)
 					subgraphG.add(ID_G)
 					sG.addEdge(eG)
-	return simE	, subgraphG
+	return simE	, subgraphG, sG
