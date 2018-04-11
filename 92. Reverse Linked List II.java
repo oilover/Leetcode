@@ -96,7 +96,7 @@ public class Solution {
     }
 	static ListNode p3 = new ListNode(425);
 	static void gao(ListNode p) {
-		p = p3;
+		p = p3; 
 	}
 	static ListNode t1,t2;
 	public static void main(String[] args) {
