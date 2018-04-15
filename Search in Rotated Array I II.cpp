@@ -86,3 +86,35 @@ public:
         return a[l];
     }
 };
+// ===========
+// class Solution {
+// public:
+//     int findMin(vector<int>& nums) {
+        
+//     }
+// };
+#define prt(k) cout<<#k" = "<<k<<endl
+class Solution {  // 153. Find Minimum in Rotated Sorted Array
+public:
+    int findMin(vector<int>& a) {
+        int n = a.size();
+        if (n==1) return a[0];
+        int l = 0, r = n-1;
+        while (l<r) {
+            int mid = (l+r) / 2;
+            // prt(mid);
+            
+            if (a[r] == a[mid]) {
+                r--;
+                continue;
+            }
+            if (a[mid] > a[r]) {
+                l=mid+1;
+            } else {
+                r = mid;
+            }
+            
+        }
+        return a[l];
+    }
+};
