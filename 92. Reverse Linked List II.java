@@ -10,10 +10,10 @@ class ListNode {
       val = x;
       next = null;
   }
-@Override
-public String toString() {
-	return "[" + val + "]";
-}	
+	@Override
+	public String toString() {
+		return "[" + val + "]";
+	}	
 }   
 
 public class Solution {
@@ -96,7 +96,7 @@ public class Solution {
     }
 	static ListNode p3 = new ListNode(425);
 	static void gao(ListNode p) {
-		p = p3; 
+		p = p3;
 	}
 	static ListNode t1,t2;
 	public static void main(String[] args) {
@@ -117,5 +117,3 @@ public class Solution {
 		System.out.println("Finished");
 	}
 }
-
-//
