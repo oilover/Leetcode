@@ -39,3 +39,37 @@ public:
         return result;
     }
 };
+
+#define Node TreeNode
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        if (root==NULL) return result;
+        Node *pre=nullptr, *cur = root;
+        while (cur!=NULL) {
+            if (cur->left == NULL) {
+                result.push_back(cur->val);
+                pre = cur;
+                cur = cur->right;
+            } else {
+                Node *u = cur->left;
+                while (u->right!=nullptr && u->right!=cur) {
+                    u=  u->right;
+                }
+                if (u->right == nullptr) {
+                    u->right = cur;
+                    
+                    cur = cur->left;
+                } else {
+                    u->right = nullptr;
+                    result.push_back(cur->val);
+                    pre = cur;
+                    cur = cur->right;
+                }
+            }
+        }
+        return result;
+    }
+};
+
