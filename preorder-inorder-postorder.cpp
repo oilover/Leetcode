@@ -103,3 +103,39 @@ public:
         return result;
     }
 };
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        if (root==NULL) return result;
+        Node *pre=nullptr, *cur = root;
+        stack<Node*> S;
+        while (!S.empty() || cur) {
+            if (cur==NULL) {
+                cur = S.top(); S.pop();
+                result.push_back(cur->val);
+                cur = cur->right;
+            } else {
+                S.push(cur);
+                cur = cur->left;
+            }
+        }
+        return result;
+    }
+};
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> result;
+        if (root==NULL) return result;
+        Node *pre=nullptr, *cur = root;
+        stack<Node*> S; S.push(root);
+        while (!S.empty()) {
+            cur=  S.top(); S.pop();
+            result.push_back(cur->val);
+            if (cur->right) S.push(cur->right);
+            if (cur->left) S.push(cur->left);
+        }
+        return result;
+    }
+};
