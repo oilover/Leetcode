@@ -73,3 +73,33 @@ public:
     }
 };
 
+/**
+ */
+#define Node TreeNode
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> result;
+        stack<Node*> S;
+        Node *p = root, *pre=NULL; //pre: 刚刚访问过的点
+        do {
+            while (p!=NULL) {
+                S.push(p);
+                p=p->left;
+            }
+            pre = NULL;
+            while (!S.empty()) {
+                p = S.top(); S.pop();
+                if (p->right == pre) { 
+                    result.push_back(p->val);
+                    pre = p;
+                } else {
+                    S.push(p); 
+                    p = p->right;
+                    break;
+                }
+            }
+        } while (!S.empty());
+        return result;
+    }
+};
