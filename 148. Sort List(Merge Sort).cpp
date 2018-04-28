@@ -53,3 +53,53 @@ public:
     //     return sortList(head, nullptr);
     // }
 };
+
+
+class Solution {
+public:
+	ListNode* sortList(ListNode* head) {
+		if (head == nullptr || head->next == nullptr)
+		{
+			return head;
+		}
+		ListNode* slow = head;
+		ListNode* fast = head->next;
+
+		while (fast && fast->next)
+		{
+			slow = slow->next;
+			fast = fast->next->next;
+		}
+
+		ListNode* l2 = slow->next;
+		slow->next = nullptr;
+
+		ListNode* sortedL1 = sortList(head);
+		ListNode* sortedL2 = sortList(l2);
+
+		return merge(sortedL1, sortedL2);
+	}
+private:
+	ListNode* merge(ListNode* l1, ListNode* l2)
+	{
+		ListNode dummy(-1);
+		ListNode* curr = &dummy;
+		while (l1 && l2)
+		{
+			if (l1->val < l2->val)
+			{
+				curr->next = l1;
+				l1 = l1->next;
+			}
+			else
+			{
+				curr->next = l2;
+				l2 = l2->next;
+			}
+			curr = curr->next;
+		}
+		curr->next = l1 ? l1 : l2;
+		ListNode* ret = dummy.next;
+		return ret;
+	}
+};
