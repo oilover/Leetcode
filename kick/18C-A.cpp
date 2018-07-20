@@ -39,7 +39,6 @@ bool dfs(int u, int prev, int start, vector<int> &path)
         if (getEdge(v,u)) continue;
         if (v==start)
         {
-            puts("cycle find!!");
             cycle = path;
             return true;
         }
@@ -72,7 +71,7 @@ void BFS()
     }
     while (!Q.empty()) {
         int cur = Q.front().second; int cur_dis=Q.front().first; Q.pop();
-        dis[cur] = cur_dis;  prt(cur);
+        dis[cur] = cur_dis;
         for (int i=head[cur];~i;i=edge[i].next) {
             int to = edge[i].to;
             if (vis[to]) continue;
@@ -80,16 +79,15 @@ void BFS()
             vis[to] = true;
         }
     }
-    printf("dis: ");
         for (int i=1;i<=n;i++) {
-            printf("%4d",dis[i]);
+            printf(" %d",dis[i]);
         } cout<<endl;
 }
 }
 
 int main()
 {
-    int _; cin>>_;
+    int _; cin>>_; int ca=1;
     while (_--) {
         cin>>n;
         Graph::init();
@@ -99,16 +97,12 @@ int main()
             Graph::addedge(v,u);
         }
         for (int i=1;i<=n;i++) {
-            vector<int> vec;  prt(i); vec.push_back(i);
+            vector<int> vec;  vec.push_back(i);
             memset(Graph::edge_used,false,sizeof Graph::edge_used);
             if (Graph::dfs(i,-1,i,vec)) {
                 break;
             }
-            cout<<endl;
-        }  printf("cycle: ");
-        for (auto x: cycle) {
-            printf("%4d",x);
-        } cout<<endl;
+        }  printf("Case #%d:", ca++);
         Graph::BFS();
 
     }
