@@ -10,7 +10,16 @@ int n;
 vector<int> cycle;
 namespace Graph
 {
-bool vis[N];
+    bool edge_used[N][N];
+    bool getEdge(int u,int v) {
+        if (u<0 || v<0) return false;
+        return edge_used[u][v];
+    }
+    void setEdge(int u,int v, bool ok) {
+        if (u<0 || v<0) return;
+        edge_used[u][v] = edge_used[v][u] = ok;
+    }
+
 struct Edge
 {
     int to,next;
@@ -20,16 +29,14 @@ void init()
 {
     tot = 0;
     memset(head,-1,sizeof(head));
-    memset(vis,false,sizeof vis);
 }
-bool dfs(int u, int start, vector<int> &path)
+bool dfs(int u, int prev, int start, vector<int> &path)
 {
-    if (vis[u])
-        return false;
-    vis[u] = true;     prt(u);
     for (int i=head[u]; ~i; i=edge[i].next)
     {
         int v = edge[i].to;  //prt(v);
+        if (v==prev) continue;
+        if (getEdge(v,u)) continue;
         if (v==start)
         {
             puts("cycle find!!");
@@ -37,13 +44,13 @@ bool dfs(int u, int start, vector<int> &path)
             return true;
         }
         path.push_back(v);
-        if (dfs(v,start,path))
+        setEdge(u,v,true);
+        if (dfs(v,u, start,path))
         {
-            puts("dfs");
             return true;
         }
         path.pop_back();
-        vis[v] = false;
+        setEdge(u,v,false);
     }
     return false;
 }
@@ -51,6 +58,32 @@ void addedge(int u,int v)
 {
     edge[tot].to = v;
     edge[tot].next = head[u]; head[u] = tot++;
+}
+bool vis[N];
+int dis[N];
+void BFS()
+{
+    queue<pair<int,int> > Q;
+    memset(vis,false,sizeof vis);
+    for (int x: cycle) {
+        Q.push(make_pair(0,x));
+        dis[x] = 0;
+        vis[x] = true;
+    }
+    while (!Q.empty()) {
+        int cur = Q.front().second; int cur_dis=Q.front().first; Q.pop();
+        dis[cur] = cur_dis;  prt(cur);
+        for (int i=head[cur];~i;i=edge[i].next) {
+            int to = edge[i].to;
+            if (vis[to]) continue;
+            Q.push(make_pair(cur_dis+1,to));
+            vis[to] = true;
+        }
+    }
+    printf("dis: ");
+        for (int i=1;i<=n;i++) {
+            printf("%4d",dis[i]);
+        } cout<<endl;
 }
 }
 
@@ -66,15 +99,31 @@ int main()
             Graph::addedge(v,u);
         }
         for (int i=1;i<=n;i++) {
-            memset(Graph::vis,false,sizeof Graph::vis);
             vector<int> vec;  prt(i); vec.push_back(i);
-            if (Graph::dfs(i,i,vec)) {
+            memset(Graph::edge_used,false,sizeof Graph::edge_used);
+            if (Graph::dfs(i,-1,i,vec)) {
                 break;
             }
             cout<<endl;
-        }
+        }  printf("cycle: ");
         for (auto x: cycle) {
             printf("%4d",x);
         } cout<<endl;
+        Graph::BFS();
+
     }
 }
+/**
+2
+5
+1 2
+2 3
+3 4
+2 4
+5 3
+
+3
+1 2
+3 2
+1 3
+*/
