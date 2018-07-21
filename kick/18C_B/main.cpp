@@ -7,44 +7,26 @@ void read(int &x) { scanf("%d",&x);  }
 typedef pair<int,int> P;
 const int N = 23;
 int n, a[N][N];
-vector<P> edges;
-int getEdgeLen(P p) {
-    return a[p.first][p.second];
-}
-vector<P> getEdgeSet(int s)
-{
-    vector<P> vec;
-    for (int i=0;i<edges.size();i++) if (s>>i & 1) vec.push_back(edges[i]);
-    return vec;
-}
-
-bool OK(vector<P> edges)
-{
-    int m = edges.size();
-    map<int,int> endpoints;
-    for (P e: edges) {
-        endpoints[e.second]++; endpoints[e.first]++;
-    }
-    for (P e : edges) {
-        if (endpoints[e.first]>1 || endpoints[e.second] > 1) return false;
-    }
-    return true;
-}
 bool isPolygon(vector<int> edges)
 {
     int m = edges.size(); if (m<3) return false;
-    for (int i=0;i<m;i++) {
-        int other_sum = 0;
-        for (int j=0;j<m;j++)if(i-j) {
-            other_sum+=edges[j];
-        }if (edges[i] >= other_sum) return false;
-    }
-    return true;
+    int sum=0, ma = 0;
+    for (int x: edges) sum+=x, ma=max(ma, x);
+    return ma < sum - ma;
 }
-bool isPolygon(vector<P> edges)
+int total = 0;
+void solve(int mask, vector<int>& edges)
 {
-    vector<int> v; for (P p: edges) v.push_back(getEdgeLen(p));
-    return isPolygon(v);
+    if (mask+1 == (1<<n)) total += isPolygon(edges);
+    for (int i=0;i<n;i++) if (!(mask>>i&1)) {
+        solve(mask|1<<i, edges);
+        for (int j=i+1;j<n;j++) if (!(mask>>j&1) && a[i][j]) {
+            edges.push_back(a[i][j]);
+            solve(mask| (1<<i) | (1<<j), edges);
+            edges.pop_back();
+        }
+        break;
+    }
 }
 int main()
 {
@@ -52,18 +34,9 @@ int main()
     while (_--) {
         cin>>n; for (int i=0;i<n;i++) for (int j=0;j<n;j++) cin>>a[i][j];
         printf("Case #%d:", ca++);
-        edges.clear();
-        for (int i=0;i<n;i++) for (int j=i+1;j<n;j++) if (a[i][j]) {
-            edges.push_back(P(i,j));
-        }
-        int m=edges.size();
-        int total = 0;
-        for (int i=0;i<(1<<m);i++) {
-            vector<P> e=getEdgeSet(i);
-            if (OK(e) && isPolygon(e)) {
-                total++;
-            }
-        }
+        total= 0;
+        vector<int> vec;
+        solve(0,vec);
         printf(" %d\n", total);
     }
     return 0;
