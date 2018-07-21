@@ -7,15 +7,18 @@ typedef long long LL;
 void read(int &x) { scanf("%d",&x);  }
 using namespace std;
 const int Mod = 1e9+7;
-const int N = 203;
+const int MAXN = 1001203;
 int n, K, x_1, y_1, C, D, E_1, E_2, F;
-LL x[N],y[N], A[N];;
+LL x[MAXN],y[MAXN], A[MAXN];;
 LL power(LL a, LL n) {
     LL res = 1;
     for (; n>0; a=a*a%Mod, n>>=1) if (n&1) {
         res = res * a % Mod;
     }
     return res;
+}
+LL NY(LL a) {
+    return power(a, Mod-2);
 }
 void generateA()
 {
@@ -27,7 +30,7 @@ void generateA()
         A[i] = (x[i] + y[i]) % F;
     }
 }
-LL Pow[N]; /// 1^i, 2^i, ...
+LL Pow[MAXN]; /// 1^i, 2^i, ...
 int main()
 {
     int _; cin>>_; int ca=1;
@@ -36,18 +39,18 @@ int main()
         generateA();  printf("Case #%d:", ca++);
 
         LL sum = 0;
+        LL ans = 0; LL N = n;
         for (int i=1;i<=n;i++) Pow[i]=i % F;
-        for (int pow_i=1; pow_i<=K; pow_i++) {
-            for (int i=1;i<=n;i++) {
-                for (int j=i;j<=n;j++) {
-                    for (int id=i;id<=j;id++) {
-                        sum=(sum + A[id]*Pow[id-i+1]%Mod) % Mod;
-                    }
-                }
+        for (int i=1;i<=n;i++) {
+            if (i==1) sum=K;
+            else {
+                sum = (sum + (power(i,K+1)-i) * NY(i-1) % Mod) % Mod;
+
+
             }
-            for (int i=1;i<=n;i++) Pow[i] = Pow[i] * i % Mod;
+            ans = (ans + A[i]*(N-i+1) % Mod * sum % Mod ) % Mod;
         }
-        printf(" %lld\n", sum);
+        printf(" %lld\n", ans);
     }
     return 0;
 }
