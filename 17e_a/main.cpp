@@ -12,7 +12,7 @@ int main()
     int _; cin>>_; int ca=1;
     while (_--) {
         cin>>str;
-        memset(dp,63,sizeof 63);
+        memset(dp,63,sizeof dp);
         n = str.size(); dp[0] = 1;
         for (int i=1;i<n;i++) {
             dp[i] = min(dp[i], dp[i-1]+1);
@@ -20,16 +20,17 @@ int main()
                 int L=i-j+1;
                 int t = j; int pasteNum = 1;
                 string pattern = str.substr(j,L);
-                while (t-L>=0 && str.substr(t-L,L)==pattern) { 
+                while (t-L>=0 && str.substr(t-L,L)==pattern) {
                     t-=L;
                     pasteNum++;
                 }
                 string tmp = str.substr(0,t);
-                if (tmp.find(pattern)>=0) {
+                if (tmp.find(pattern)!=std::string::npos) {
                     dp[i] = min(dp[i], dp[t-1] + pasteNum+1);
                 } else {
-                    dp[i]=min(dp[i], dp[t+L-1] + pasteNum);
+                    if (t<j) dp[i]=min(dp[i], dp[t+L-1] + pasteNum);
                 }
+
             }
         }
 printf("Case #%d:", ca++);
