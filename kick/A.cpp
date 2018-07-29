@@ -18,10 +18,14 @@ void GenData()
     for (int i=1;i<=N;i++) {
         S[i] = X[i] + L;
         sum[i] = sum[i-1] + S[i];
-        s_odd[i] = s_odd[i] + S[i]%2;
+        s_odd[i] = s_odd[i-1] + S[i]%2;
     }
 }
 typedef pair<LL, int> P;
+void print(P p)
+{
+    printf(" (%lld,%d)", p.first, p.second);
+}
 int main()
 {
     int _,ca=1; cin>>_;
@@ -29,29 +33,42 @@ int main()
         cin>>N>>O>>D;
         cin>>X[1]>>X[2]>>A>>B>>C>>M>>L;
         GenData();
-        set<P> a;
+        set<P> aset;
         LL ans = -1e18;
         LL f = -1e10;
         int start=-1, odd=0;
-        for (int i=0;i<N;i++) {
-            if (start==-1) {
-                if (odd + (S[i]%2==1) <= O && S[i]<=D) {
-                    f = S[i];
-                    odd += (S[i]%2==1);
+        aset.insert(P(0,0));
+        for (int i=1;i<=N;i++) {
+            if (S[i]%2==1 && s_odd[i] > O) {
+                int lo =  lower_bound(s_odd, s_odd+i, s_odd[i]-O-1) - s_odd;
+                int hi = upper_bound(s_odd, s_odd+i, s_odd[i]-O-1) - s_odd;
+                for (int k=lo;k<hi;k++) {
+                    aset.erase(P(-sum[k],k));
+                 //   cout<<" *"<<k;
                 }
+            } //cout<<" ---"<<i<<endl;
+            auto p = aset.upper_bound(P(D-sum[i],i));
+            if (p!=aset.begin()) p--;
+            else {
                 continue;
-            }
-            if (f>0) {
-                if
-            } else { /// f<=0
-                if (S[i]>D && S[i]+f<=D) {
-                    /// f = f+ S[i]
-                    if (odd + S[i]%2<= O ) {
-                        ans
-                    }
-                }
-            }
+            }  //print(*p); prt(s_odd[i]-s_odd[p->second]);
+
+//            while (p!=aset.begin() && s_odd[i]-s_odd[p->second] > O ) {
+//                if (sum[i] + p->first <= ans) break;
+//               // printf("-->"); print(*p);
+//                p--;
+//            }
+            if (s_odd[i]-s_odd[p->second] <= O ) {
+                ans = max(ans, sum[i] + p->first);
+            }// prt(ans);
+            aset.insert(P(-sum[i],i));
         }
-        printf("Case #%d:", ca++);
+        printf("Case #%d: ", ca++);
+        if (ans <= (LL)-1e18) {
+            puts("IMPOSSIBLE");
+        }
+        else {
+            cout<<ans<<endl;
+        }
     }
 }
