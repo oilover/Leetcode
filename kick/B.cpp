@@ -37,10 +37,6 @@ bool can(pair<LL,LL> p,LL x, LL y)
 {
     return can(p.first, p.second, x,y);
 }
-void print(pair<LL,LL> p)
-{
-    cout<<" ("<<p.first<<","<<p.second<<") ";
-}
 int main()
 {
     int _,ca=1; cin>>_;
@@ -64,22 +60,19 @@ int main()
             vec.push_back(make_pair(pos[id], height[id]));
         }
         sort(vec.begin(), vec.end());
-//prt(tot);
         for (int i=1;i<=K;i++) {
             bool OK = false;
             auto tmp = *vec.rbegin();
-         //   print(make_pair(x[i],y[i]));cout<<":: ";
             if (x[i]<=vec[0].first) OK = can(vec[0],x[i],y[i]);
             else {
                 if (x[i]>=tmp.first) OK = can(tmp,x[i],y[i]);
                 else {
                     auto t = lower_bound(vec.begin(),vec.end(),make_pair(x[i],0));
                     OK |= can(*t, x[i],y[i]);
-                 //   print(*t); //prt(can(*t, x[i],y[i]) );
                     t--;
                     OK |= can(*t, x[i],y[i]);
                 }
-            } //prt(OK);
+            } 
             if (OK) ans ++; //ans += OK;
         }
         printf("Case #%d: ", ca++);
