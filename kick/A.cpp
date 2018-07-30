@@ -3,7 +3,7 @@
 using namespace std;
 #define prt(k) cerr<<#k" = "<<k<<endl;
 typedef long long LL;
-const int INF = 0x3f3f3f3f;
+const LL INF = 0x3f3f3f3f3f3f3f3fLL;
 void read(int &x) { scanf("%d",&x);  }
 const int MAXN = 501289;
 LL X[MAXN], S[MAXN], N,O,D,A,B,C,M,L;
@@ -34,9 +34,7 @@ int main()
         cin>>X[1]>>X[2]>>A>>B>>C>>M>>L;
         GenData();
         set<P> aset;
-        LL ans = -1e18;
-        LL f = -1e10;
-        int start=-1, odd=0;
+        LL ans = -INF;
         aset.insert(P(0,0));
         for (int i=1;i<=N;i++) {
             if (S[i]%2==1 && s_odd[i] > O) {
@@ -51,20 +49,14 @@ int main()
             if (p!=aset.begin()) p--;
             else {
                 continue;
-            }  //print(*p); prt(s_odd[i]-s_odd[p->second]);
-
-//            while (p!=aset.begin() && s_odd[i]-s_odd[p->second] > O ) {
-//                if (sum[i] + p->first <= ans) break;
-//               // printf("-->"); print(*p);
-//                p--;
-//            }
+            }
             if (s_odd[i]-s_odd[p->second] <= O ) {
                 ans = max(ans, sum[i] + p->first);
             }// prt(ans);
             aset.insert(P(-sum[i],i));
         }
         printf("Case #%d: ", ca++);
-        if (ans <= (LL)-1e18) {
+        if (ans <= -INF) {
             puts("IMPOSSIBLE");
         }
         else {
