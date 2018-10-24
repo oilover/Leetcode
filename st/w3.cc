@@ -32,9 +32,6 @@ int main(int argc, char const *argv[])
     int now = v[1].size();
   //  sort(v+2, v+m+1, cmp);
     multiset<int> heads;
-    if (now > v[2].size()) {
-        puts("0"); return 0;
-    }
 
     LL ans = 0;
     while (true) {
@@ -44,15 +41,19 @@ int main(int argc, char const *argv[])
                 (v[i].size() == v[maxid].size() && f(v[i]) < f(v[maxid]) ) ) {
                     maxid = i;
                 }
-
         }
         if (v[maxid].size() < now) break;
         vector<P> tmp;
         for (int i=2;i<=m;i++) if (!v[i].empty() && i!=maxid) {
             tmp.push_back(P(f(v[i]) ,i)) ;
+
+        }
+        for (int i=2;i<=m;i++) if (!v[i].empty() && i!=maxid) {
+            tmp.push_back(P(f(v[i]) ,i)) ;
+
         }
         sort(tmp.begin(), tmp.end());
-        if (tmp.size()>=2 && tmp[0].first +tmp[1].first < f(v[maxid])) {
+        if (tmp.size()>=2 && tmp[0].first + tmp[1].first < f(v[maxid])) {
             int t = tmp[0].second;
             v[t].erase(v[t].begin());
             t = tmp[1].second;

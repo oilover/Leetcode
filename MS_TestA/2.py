@@ -1,4 +1,4 @@
-import bisect
+from bisect import bisect_left, bisect_right
 global n,a,b
 n=int(input())
 a = []

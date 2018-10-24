@@ -1,0 +1,69 @@
+Received: (eyou anti_spam gateway 4.1.0); Tue, 04 Sep 2018 05:48:16 +0800
+X-EMDG-MID: <736011296.25671@eyou.net>
+Received: from 54.240.6.71 by 202.117.112.39 with SMTP; Tue, 04 Sep 2018 05:48:16 +0800
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=fnnsgr5htpxav5u2etgqbpvzzlqqnawr; d=jetbrains.com; t=1536011313;
+	h=Date:From:Reply-To:To:Message-ID:Subject:MIME-Version:Content-Type;
+	bh=tF3RbcfeWFUFaXRLtDsT9CV3jLcFWLWunHzh718CvCI=;
+	b=qvxELHGlGpQHyEKcOoOZYVjfUSffZUjnWCrzMGDVpKN62ejj2exftP6GZ/7JGSvy
+	wFsRMY77BZMAwZDuAHOC39GRxPTqTX85s75rlYRtLtxPr/wR9AV2NntEhFTliPufKgv
+	R3OcxkMONNdXwbWg2dSTo+6bYBg+M++TSOL2eQ7Q=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=uku4taia5b5tsbglxyj6zym32efj7xqv; d=amazonses.com; t=1536011313;
+	h=Date:From:Reply-To:To:Message-ID:Subject:MIME-Version:Content-Type:Feedback-ID;
+	bh=tF3RbcfeWFUFaXRLtDsT9CV3jLcFWLWunHzh718CvCI=;
+	b=s8ztrk30deymazXF0C12AaPu7cXjr1snt7hzQ4Tz4uAWBsyn6sIvksQMublg8uIg
+	16Rh5cVTKpHmrrZZmm5LnLtse7xOGb24wbvIvVaW23CE9tnm8SmNE9W+U+hHQZ8hmZN
+	B608Lx4x8+s9zJv12TVc5OCv9oHUzBsghpOWxtvM=
+Date: Mon, 3 Sep 2018 21:48:33 +0000
+From: JetBrains Account <no_reply@jetbrains.com>
+Reply-To: JetBrains Support Team <support-int@jetbrains.com>
+To: liuhuang@stu.xidian.edu.cn
+Message-ID: <01020165a168a04c-7f01de3d-7549-4c1e-8ded-fb7822a59672-000000@eu-west-1.amazonses.com>
+Subject: JetBrains Educational Pack Confirmation
+MIME-Version: 1.0
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_106583_834201090.1536011311659"
+X-JETBRAINS-MESSAGE-ID: 0008BBC244EBB64FE13D179F13A9F354E7D
+X-SES-Outgoing: 2018.09.03-54.240.6.71
+Feedback-ID: 1.eu-west-1.If0nsvUdGurxgDo3vA8LWdhLnkOp8FG1t+g4MeEGc40=:AmazonSES
+
+------=_Part_106583_834201090.1536011311659
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+You've received this email because your email address was used for registering/updating a JetBrains Educational Pack. You can link JetBrains products to another email address in another step.
+
+Please follow this link to confirm your decision and start using JetBrains Educational Pack for free: Confirm Request [ https://www.jetbrains.com/shop/eform/students/request?code=7gqlrk1g9xq9r2hqzkd1bzg12 ]
+
+Yours truly,
+JetBrains Team
+https://www.jetbrains.com
+The Drive to Develop
+
+------=_Part_106583_834201090.1536011311659
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <body>
+    <p>Hi,</p>
+    <p>You've received this email because your email address was used for registering/updating a JetBrains Educational Pack. You can link JetBrains products to another email address in another step.</p>
+    <p>Please follow this link to confirm your decision and start using JetBrains Educational Pack for free:</p>
+    <a href="https://www.jetbrains.com/shop/eform/students/request?code=7gqlrk1g9xq9r2hqzkd1bzg12">Confirm Request</a>
+    <p>
+      Yours truly,
+      <br/>
+      JetBrains Team
+      <br/>
+      <a href="https://www.jetbrains.com">https://www.jetbrains.com</a>
+      <br/>
+      The Drive to Develop
+      <br/>
+    </p>
+  </body>
+</html><img src="https://account.jetbrains.com/services/email/track-opened.gif?trackingCode=005EB20F51DEC490F4749E9A0B16FE4ABB7596702A1229BBF57A98E9323823B9FB7796F312D0F2ECB5D28E51D62A92EDFBE19E8AD629BE1935A801D28F3B9F76F5" alt=""/>
+------=_Part_106583_834201090.1536011311659--
