@@ -28,6 +28,7 @@ public:
 int main(int argc, char const *argv[])
 {
     vector<int> v(100, 1);
+    if (make_pair('a',2)==make_pair('a',2)) puts("sadf");
    prt(&v[0]); prt(v.capacity()); prt(v.size());
 
     v.reserve(1700);
