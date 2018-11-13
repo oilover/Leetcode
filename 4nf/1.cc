@@ -11,6 +11,9 @@ int dy[] = {1,-1,0,0};
 
 int main(int argc, char const *argv[])
 {
+    map<char,int> cnt;
+    cnt['a']=34;
+    prt(cnt.size());
     string s;
     while (cin>>s) {
         map<char,int> mp;

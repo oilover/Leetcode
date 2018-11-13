@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define prt(k) cout<<#k" = "<<k<<"  ";
 typedef long long LL;
+#define prt(k) cout<<#k" = "<<k<<"  ";
 void read(int &re) { scanf("%d", &re); }
 void read(LL &re) { scanf("%lld", &re); }
 const int N = 2100;
@@ -22,26 +22,29 @@ public:
 
     A() {
 
-        printf(" %d A", ++ai);
+     //   printf(" %d A", ++ai);
     }
 };
 int main(int argc, char const *argv[])
 {
-    vector<int> v(100, 1);
-    if (make_pair('a',2)==make_pair('a',2)) puts("sadf");
-   prt(&v[0]); prt(v.capacity()); prt(v.size());
-
-    v.reserve(1700);
-    int x = 0;
-    int q = x++; prt(q); cout<<endl;
-   prt(&v[0]); prt(&v[1]); prt(v.capacity()); prt(v.size());
-    v[678] = 45;
-    prt(v[697]);
-    v.resize(700, 20);
-    prt(v[678]);
-    vector<A> vv(50);
-    puts("======");
-    vv.reize(150);
+    prt(sizeof(char*));
+    prt(sizeof(LL*));
+    int p[] = new int[10]
+//     if (make_pair('a',2)==make_pair('a',2)) puts("sadf");
+//     multiset<int> ms; ms.insert(4); ms.insert(4);
+//    ;ms.erase( ms.find(4)); prt(ms.size());
+//     vector<int> v(100, 1);
+//    prt(&v[0]); prt(v.capacity()); prt(v.size());
+//     v.reserve(700); v.back
+//     int x = 0;
+//    prt(&v[0]); prt(&v[1]); prt(v.capacity()); prt(v.size());
+    // v[678] = 45;
+    // prt(v[697]);
+    // v.resize(700, 20);
+    // prt(v[678]);
+    // vector<A> vv(50);
+    // puts("======");
+    // vv.resize(150);
     /*
     memset(d,0,sizeof d);
     d[0]=1;

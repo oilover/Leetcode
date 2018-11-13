@@ -14,20 +14,20 @@ for s in sys.stdin:
             continue
         if ch=='[':
             i+=1
-            tmp = []
+            tmp = ''
             while i<n and s[i].isalpha():
-                tmp.append(s[i])
+                tmp+=s[i]
                 i+=1
-            Sstr.append(''.join(tmp))
+            Sstr.append(tmp)
             continue
         if ch==']':
             tmp, cnt = Sstr[-1], Scnt[-1]
             Sstr.pop()
             Scnt.pop()
-            # last = tmp + last
             last = cnt * (tmp + last) # ''.join[tmp, last] #(tmp+last)
             if len(Scnt)==0:
                 ans = ans + last
+                last = ''
         else:
             ans += ch
         i+=1
