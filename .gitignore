@@ -7,29 +7,42 @@ kick/18B_B/bin/Debug/B-small-practice.in
 kick/18B_B/obj/Debug/main.o
 kick/18C_B/18C_B.depend
 kick/18C_B/18C_B.layout
-kick/18C_B/2.cpp
-kick/18C_B/bin/Debug/18C_B.exe
-kick/18C_B/bin/Debug/B.out
-kick/18C_B/bin/Debug/B-large-practice.in
-kick/18C_B/obj/Debug/2.o
-kick/18C_B/obj/Debug/main.o
-kick/18C_C/18C_C.layout
-kick/18C_C/bin/Debug/18C_C.exe
-kick/18C_C/bin/Debug/C-large-practice.in
-kick/18C_C/obj/Debug/main.o
-kick/18C_B/obj/Debug/main.o
-kick/18C_B/18C_B.depend
-kick/18C_B/bin/Debug/18C_B.exe
-kick/18C_C/bin/Debug/18C_C.exe
-kick/18C_C/obj/Debug/main.o
-kick/videoplayback.webm
-kick/videoplayback.mp4
-kick/you2go - AWS re_Invent 2017_ Scaling Up to Your First 10 Million Users (ARC201).mp4.mp4
-kick/下载.webp
-kick/普吉岛.mp4
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.webm
+*.mp4
 kick/深度探索C++对象模型（清晰版）.pdf
-kick/牛客网简历模板&制作技巧大礼包.rar
-kick/A.out
+*.rar
 kick/A.exe
 kick/A-large.in
 kick/A-s.out
@@ -47,8 +60,26 @@ kick/hdtune_255.exe
 kick/ietabhelper.exe
 kick/nowcoderJLZS.crx
 kick/uTorrent.zip
-kick/18C_B/w1.cc
-22.exe
-hulu/1.exe
-*.exe
 *tempCode*
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*

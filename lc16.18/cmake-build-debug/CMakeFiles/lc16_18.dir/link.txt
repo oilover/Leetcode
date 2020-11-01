@@ -1,0 +1,3 @@
+"D:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\lc16_18.dir/objects.a
+"D:\Program Files\CodeBlocks\MinGW\bin\ar.exe" cr CMakeFiles\lc16_18.dir/objects.a @CMakeFiles\lc16_18.dir\objects1.rsp
+"D:\Program Files\CodeBlocks\MinGW\bin\g++.exe" -g   -Wl,--whole-archive CMakeFiles\lc16_18.dir/objects.a -Wl,--no-whole-archive  -o lc16_18.exe -Wl,--out-implib,liblc16_18.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\lc16_18.dir\linklibs.rsp
