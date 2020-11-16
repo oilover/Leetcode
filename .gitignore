@@ -9,7 +9,7 @@ kick/18C_B/18C_B.depend
 kick/18C_B/18C_B.layout
 # Prerequisites
 *.d
-
+*.idea*
 # Compiled Object files
 *.slo
 *.lo
@@ -24,7 +24,7 @@ kick/18C_B/18C_B.layout
 *.so
 *.dylib
 *.dll
-
+*cmake-build-debug*
 # Fortran module files
 *.mod
 *.smod
@@ -54,10 +54,7 @@ kick/B-s.out
 kick/B-small-attempt0.in
 kick/B_2.exe
 kick/B_std.out
-kick/gui-config.json
 kick/ijn_2_1.zip
-kick/hdtune_255.exe
-kick/ietabhelper.exe
 kick/nowcoderJLZS.crx
 kick/uTorrent.zip
 *tempCode*
