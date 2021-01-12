@@ -22,11 +22,10 @@ class Solution:
             if i == m - 1: pre = p
             i += 1
             p = p.next
-        last = p
-        next = p.next
+        next = p.next # 第m+1节点
         p.next = None
-        tmp = pre.next
-        t = self.rev(pre.next);
+        tmp = pre.next # 翻转部分翻转后的最后节点
+        t = self.rev(pre.next); # 翻转部分的头
         pre.next = t
         tmp.next = next
         return dummy.next
