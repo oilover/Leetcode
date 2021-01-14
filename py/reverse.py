@@ -1,9 +1,4 @@
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
+from common import *
 class Solution:
     def rev(self, p: ListNode) -> ListNode:
         if not p or not p.next: return p
@@ -30,13 +25,7 @@ class Solution:
         tmp.next = next
         return dummy.next
 
-def arrToList(a):
-    dummy = ListNode(-1)
-    p = dummy
-    for x in a:
-        p.next = ListNode(x)
-        p = p.next
-    return dummy.next
+
 s = Solution()
 p = arrToList([1,2,3,4,5])
 # p = s.rev(p)
