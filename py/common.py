@@ -10,7 +10,12 @@ def arrToList(a):
         p.next = ListNode(x)
         p = p.next
     return dummy.next
-
+def listToArr(p: ListNode):
+    a = []
+    while p:
+        a.append(p.val)
+        p = p.next
+    return  a
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):

@@ -11,12 +11,15 @@ class Solution:
         if not head: return
         if not head.next: return TreeNode(head.val)
         s, f = head, head.next
+        pre = None
         while f and f.next:
+            pre = s
             s, f = s.next, f.next.next
         t = s.next
         s.next = None
+        if pre: pre.next = None
         rt = TreeNode(s.val)
-        rt.left = self.sortedListToBST(head)
+        if (s!=head): rt.left = self.sortedListToBST(head)
         rt.right = self.sortedListToBST(t)
         return rt
 
