@@ -4,18 +4,6 @@ class Solution:
         val = {}
         val[chars[0]] = 1
         n = len(chars)
-        # for i,x in enumerate(chars):
-        #     if i==0: continue
-        #     if i%2==0:
-        #         val[x] = val[chars[i-1]] * 2
-        #     else:
-        #         val[x] = val[chars[i-1]] * 5
-        # for i,x in enumerate(chars):
-        #     if i%2>0: continue
-        #     if (i+1<n):
-        #         val[x+chars[i+1]] = val[chars[i+1]] - val[x]
-        #     if (i+2<n):
-        #         val[x+chars[i+2]] = val[chars[i+2]] - val[x]
         t = []
         for k,v in val.items():
             t.append([v,k])
@@ -31,16 +19,9 @@ class Solution:
                 res = t*chars[i] + res
             if t==4:
                 res = chars[i] + chars[i+1] + res
-            if t==5: res = chars[i+1] + res
-            if 6<=t and t<9: res = chars[i+1] + (t-5)*chars[i] + res
+            if 5<=t and t<9: res = chars[i+1] + (t-5)*chars[i] + res
             if t==9: res = chars[i] + chars[i+2] + res
             i+=2
-        # for k,v in t:
-        #     t = num // k
-        #     num %= k
-        #     res += t*v
-            # while num>=k:
-            #     num-=k
 
         return res
 

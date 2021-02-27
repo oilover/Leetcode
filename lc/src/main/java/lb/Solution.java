@@ -1,5 +1,7 @@
 package lb;
 
+import java.util.*;
+
 /*
 // Definition for a Node.
 */
@@ -26,6 +28,7 @@ public class Solution {
     public Node copyRandomList(Node head) {
         if (head==null) return null;
         copy(head);
+        Stack<Integer> s= new Stack<Integer>();
         Node cur = head;
         while(cur.next!=null && cur.next.next!=null) {
             Node p = cur.next;
@@ -45,11 +48,19 @@ public class Solution {
         }
         return newHead;
     }
-
+    static  void f(Integer a) {
+        a = 6;
+    }
     public static void main(String[] args) {
         Node p = new Node(7);
         p.next = new Node(3);
         p.next.random = p;
-        (new Solution()).copyRandomList(p);
+//        (new Solution()).copyRandomList(p);
+        List<Integer> a = new ArrayList<Integer>();
+        a.add(2);
+        List<Integer> b = a;
+        a.add(3);
+        Integer x = 2; f(x);
+        System.out.println(x);
     }
 }
