@@ -28,7 +28,7 @@ public class Solution {
     public Node copyRandomList(Node head) {
         if (head==null) return null;
         copy(head);
-        Stack<Integer> s= new Stack<Integer>();
+        Stack<Integer> s = new Stack<Integer>();
         Node cur = head;
         while(cur.next!=null && cur.next.next!=null) {
             Node p = cur.next;
