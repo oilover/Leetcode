@@ -11,6 +11,14 @@ class ListNode {
 }
 public class Solution {
     final ListNode dummy = new ListNode(-1);
+    public ListNode arrToLinkedList(int a[]) {
+        ListNode pre = dummy;
+        for (int x: a) {
+            pre.next = new ListNode(x);
+            pre = pre.next;
+        }
+        return dummy.next;
+    }
     public ListNode reverseKGroup(ListNode head, int k) {
         if (head==null || head.next==null) return head;
         ListNode pre = dummy, p = head;
@@ -24,7 +32,6 @@ public class Solution {
             if (i<k) {
                 return dummy.next;
             }
-            ListNode next = p;
             while (!stack.empty()) {
                 ListNode t = stack.pop();
                 t.next = null;

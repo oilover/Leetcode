@@ -5,12 +5,12 @@ import java.util.*;
 /*
 // Definition for a Node.
 */
-class Node {
+class RandNode {
     int val;
-    Node next;
-    Node random;
+    RandNode next;
+    RandNode random;
 
-    public Node(int val) {
+    public RandNode(int val) {
         this.val = val;
         this.next = null;
         this.random = null;
@@ -18,28 +18,28 @@ class Node {
 }
 
 public class Solution {
-    void copy(Node head) {
+    void copy(RandNode head) {
         if (head==null) return;
         copy(head.next);
-        Node p = new Node(head.val);
+        RandNode p = new RandNode(head.val);
         p.next = head.next;
         head.next = p;
     }
-    public Node copyRandomList(Node head) {
+    public RandNode copyRandomList(RandNode head) {
         if (head==null) return null;
         copy(head);
         Stack<Integer> s = new Stack<Integer>();
-        Node cur = head;
+        RandNode cur = head;
         while(cur.next!=null && cur.next.next!=null) {
-            Node p = cur.next;
+            RandNode p = cur.next;
             if (cur.random!=null) {
                 p.random = cur.random.next;
             }
             cur = p.next;
         }
         cur = head;
-        Node newHead = head.next;
-        Node p = newHead;
+        RandNode newHead = head.next;
+        RandNode p = newHead;
         while(cur!=null && cur.next!=null ) {
             cur.next = cur.next.next;
             if (p.next!=null) p.next = p.next.next;
@@ -52,8 +52,8 @@ public class Solution {
         a = 6;
     }
     public static void main(String[] args) {
-        Node p = new Node(7);
-        p.next = new Node(3);
+        RandNode p = new RandNode(7);
+        p.next = new RandNode(3);
         p.next.random = p;
 //        (new Solution()).copyRandomList(p);
         List<Integer> a = new ArrayList<Integer>();
