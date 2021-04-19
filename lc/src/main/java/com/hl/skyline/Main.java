@@ -23,11 +23,13 @@ class Solution {
     public List<List<Integer>> getSkyline(int[][] buildings) {
         int n = buildings.length;
         List<Endpoint> endpoints = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
         for (int[] building: buildings) {
             endpoints.add(new Endpoint(building[0], building[2], true));
             endpoints.add(new Endpoint(building[1], building[2], false));
         }
         Collections.sort(endpoints);
+        return  res;
     }
 }
 public class Main {

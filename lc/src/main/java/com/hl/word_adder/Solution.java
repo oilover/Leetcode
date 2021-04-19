@@ -18,8 +18,30 @@ public class Solution {
         }
         return true;
     }
+    void dfs(String target, String cur, LinkedList<String> path, List<List<String>> res) {
+        if (cur.equals(target)) {
+            List<String> t = new ArrayList<>();
+            Collections.copy(path, t);
+            Collections.reverse(t);
+            res.add(t);
+            return;
+        }
+        Set<String> list = prevWord.get(cur);
+        for (String word: list) {
+            if (visited.contains(word)) {
+                continue;
+            }
+            visited.add(word);
+            path.add(word);
+            dfs(target, word, path, res);
+            visited.remove(word);
+            path.removeLast();
+        }
+    }
+    HashMap<String, Set<String>> prevWord = new HashMap<>();
+    HashSet<String> visited = new HashSet<>();
     public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
-        HashMap<String, String> prevWord = new HashMap<>();
+        prevWord = new HashMap<>();
         Queue<String> queue = new LinkedList<>();
         queue.offer(beginWord);
         while (!queue.isEmpty()) {
@@ -27,15 +49,29 @@ public class Solution {
             if (cur.equals(endWord)) {
                 break;
             }
-            for (String word: wordList) if (!prevWord.containsKey(word) && canChange(cur, word)) {
+            for (String word: wordList) if (canChange(cur, word)) {
                 queue.offer(word);
-                prevWord.put(word, cur);
+                if (!prevWord.containsKey(word)) {
+                    prevWord.put(word, new HashSet<>());
+                }
+                prevWord.get(word).add(cur);
             }
         }
         List<List<String>> res = new ArrayList<>();
         if (!prevWord.containsKey(endWord)) {
             return res;
         }
+        LinkedList<String> path = new LinkedList<>();
+        visited = new HashSet<>();
+        dfs(beginWord, endWord, path, res);
+        return res;
 //        Collections.
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        String arr[] = new String[]{"hot","dot","dog","lot","log","cog"};
+        List<String> l = Arrays.asList(arr);
+        System.out.println(s.findLadders("hit", "cog", l));
     }
 }
