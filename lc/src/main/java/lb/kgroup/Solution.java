@@ -1,14 +1,9 @@
 package lb.kgroup;
 
+import lb.ListNode;
+
 import java.util.Stack;
 
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode() {}
-    ListNode(int val) { this.val = val; }
-    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-}
 public class Solution {
     final ListNode dummy = new ListNode(-1);
     public ListNode arrToLinkedList(int a[]) {
@@ -20,7 +15,9 @@ public class Solution {
         return dummy.next;
     }
     public ListNode reverseKGroup(ListNode head, int k) {
-        if (head==null || head.next==null) return head;
+        if (head==null || head.next==null) {
+            return head;
+        }
         ListNode pre = dummy, p = head;
         Stack<ListNode> stack = new Stack<>();
         while (p!=null) {
