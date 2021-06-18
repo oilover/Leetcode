@@ -6,9 +6,28 @@ import java.util.HashSet;
 
 public class Solution {
     public boolean isRobotBounded(String instructions) {
-        return false;
+        int dir = 0;
+        int x=0, y=0;
+        for (char ch: instructions.toCharArray()) {
+            if (ch=='L') {
+                dir = (dir+1)%4;
+                continue;
+            }
+            if (ch=='R') {
+                dir = (dir+3)%4;
+                continue;
+            }
+            switch (dir) {
+                case 0: y++; break;
+                case 1: x--; break;
+                case 2: y--; break;
+                default: x++; break;
+            }
+        }
+        return (x==0&&y==0) || dir!=0;
     }
     public String mostCommonWord(String paragraph, String[] banned) {
+        paragraph += " ";
         StringBuilder word = new StringBuilder();
         HashSet<String> hs = new HashSet<>(Arrays.asList(banned));
         HashMap<String, Integer> cnt = new HashMap<>();
@@ -27,7 +46,7 @@ public class Solution {
                 continue;
             }
             int t = cnt.getOrDefault(w,0)+1;
-            if (t>cnt.getOrDefault(ans,0)) {
+            if (t>=cnt.getOrDefault(ans,0)) {
                 ans = w;
             }
             cnt.put(w, t);
@@ -35,6 +54,9 @@ public class Solution {
         return ans;
     }
     public static void main(String[] args) {
-
+        Solution s = new Solution();
+//        String[] arr = new String[];
+        System.out.println(s.isRobotBounded("GGLLGG"));
+        System.out.println(s.mostCommonWord("Bob", new String[]{}));
     }
 }
