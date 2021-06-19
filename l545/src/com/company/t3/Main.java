@@ -33,22 +33,16 @@ class Solution {
 
     public int[] assignTasks(int[] servers, int[] tasks) {
         int n=servers.length,m=tasks.length;
-        PriorityQueue<Server> queue = new PriorityQueue<Server> (n, new Comparator<Server>() {
-            @Override
-            public int compare(Server x, Server y) {
+        PriorityQueue<Server> queue = new PriorityQueue<Server> (n, (x,y)-> {
                 return x.weight!=y.weight?x.weight-y.weight: x.id-y.id;
-            }
         });
         int ans[] = new int[m];
         for (int i = 0; i < n; i++) {
             queue.add(new Server(i,servers[i]));
         }
-        PriorityQueue<Server> busy = new PriorityQueue<>(n, new Comparator<Server>() {
-            @Override
-            public int compare(Server x, Server y) {
+        PriorityQueue<Server> busy = new PriorityQueue<>(n, (x,y)-> {
                 return x.okTime!=y.okTime ? x.okTime-y.okTime :
                     (x.weight!=y.weight?x.weight-y.weight: x.id-y.id);
-            }
         });
         for (int i=0;i<tasks.length;i++) {
             int time = i;
