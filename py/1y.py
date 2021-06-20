@@ -1,3 +1,15 @@
+from collections import Counter
+class Solution:
+    def halfQuestions(self, questions: List[int]) -> int:
+        c = Counter(questions)
+        total = 0
+        res = 0
+        for _,cnt in c.most_common():
+            total+=cnt
+            res+=1
+            if (total>=len(questions)/2): break
+        return res;
+
 
 def count1(n):
     ans = 0
