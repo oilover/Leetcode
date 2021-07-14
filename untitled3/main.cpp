@@ -16,43 +16,75 @@ using namespace std;
 //};
 class Solution {
 public:
-    bool isValid(string s) {
-        stack<char> stk;
-        map<char, int> op;
-        op['{'] = 1;
-        op['['] = 2;
-        op['('] = 3;
-        op[')'] = 4;
-        op[']'] = 5;
-        op['}'] = 6;
-        for (char ch: s) {
-            if (op[ch]>=4) { //右括号
-                if (stk.empty()) {
-                    return false;
+};
+class Node {
+public:
+    int level;
+    bool end;
+    Node* child[26];
+    set<string> words;
+//    Node() {
+//        level = 0;
+//        end = false;
+//    }
+};
+class Trie {
+public:
+    Node* root;
+    Trie() {
+        root = new Node();
+    }
+    void add(string s) {
+        Node* u = root;
+        for (int i=0;i<s.size();i++) {
+            int ch = tolower(s[i])-'a';
+            if (!u->child[ch]) u->child[ch] = new Node();
+            u = u->child[ch];
+            u->level = i+1;
+            if (i>=1) {
+                u->words.insert(s);
+                if (u->words.size() > 3) {
+                    u->words.erase(*u->words.rbegin());
                 }
-                if (op[stk.top()] != 7-op[ch]) { //不匹配
-                    return false;
-                }
-                stk.pop();
-            }else {
-                if (!stk.empty() && op[stk.top()] > op[ch]) { // 外面必须优先级高 不能 ([
-                    return false;
-                }
-                stk.push(ch);
             }
-
         }
-        return stk.empty(); // 最后栈为空
+        u->end = true;
+    }
+    vector<vector<string>> query(string query) {
+        vector<vector<string>> res;
+        Node* u = root;
+        for (int i = 0; i < query.size(); ++i) {
+            int ch = tolower(query[i])-'a';
+            if (u) u = u->child[ch];
+            if (i>=1) {
+                vector<string> v;
+                if (u) for (string s: u->words) {
+                    v.push_back(s);
+                }
+                res.push_back(v);
+            }
+        }
+        return res;
     }
 };
+vector<vector<string>> searchSuggestions(vector<string> repository, string customerQuery) {
+    Trie* trie = new Trie();
+    for (auto word: repository) {
+        trie->add(word);
+    }
+    return trie->query(customerQuery);
+}
 int main() {
 //    Singleton *s = Singleton::getInstance();
 //    std::cout << s << std::endl;
 //    s = Singleton::getInstance();
 //    std::cout << s << std::endl;
     Solution *solution = new Solution();
-    cout << solution->isValid("[()]")<<endl;
-    cout << solution->isValid("[()")<<endl;
-    cout << solution->isValid("([])");
+    vector<string> repo = {"bags","baggage","banner","box","cl","cloths","mobile"};
+    auto res = searchSuggestions(repo, "clp");
+     res = searchSuggestions(repo, "cr");
+//    cout << solution->isValid("[()]")<<endl;
+//    cout << solution->isValid("[()")<<endl;
+//    cout << solution->isValid("([])");
     return 0;
 }
