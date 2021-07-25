@@ -16,6 +16,34 @@ using namespace std;
 //};
 class Solution {
 public:
+    int f(vector<int>& a, vector<int>& b) {
+        int t = 0;
+        for (int i=0;i<a.size();i++) if(a[i]==b[i]) t++;
+        return t;
+    }
+    int maxCompatibilitySum(vector<vector<int>>& students, vector<vector<int>>& mentors) {
+        int m = students.size(), n = students[0].size();
+        const int N = 22;
+        int score[N][N];
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < m; ++j) {
+                score[i][j] = f(students[i], mentors[j]);
+            }
+        }
+        int a[N];
+        for (int i = 0; i < m; ++i) {
+            a[i]=i;
+        }
+        int ans = 0;
+        do {
+            int sum = 0;
+            for (int i=0; i < m; ++i) {
+                sum += score[i][a[i]];
+            }
+            ans = max(ans, sum);
+        } while (next_permutation(a, a+m));
+        return ans;
+    }
 };
 class Node {
 public:
@@ -74,15 +102,17 @@ vector<vector<string>> searchSuggestions(vector<string> repository, string custo
     }
     return trie->query(customerQuery);
 }
+
 int main() {
 //    Singleton *s = Singleton::getInstance();
 //    std::cout << s << std::endl;
 //    s = Singleton::getInstance();
 //    std::cout << s << std::endl;
     Solution *solution = new Solution();
-    vector<string> repo = {"bags","baggage","banner","box","cl","cloths","mobile"};
-    auto res = searchSuggestions(repo, "clp");
-     res = searchSuggestions(repo, "cr");
+    solution->maxCompatibilitySum()
+//    vector<string> repo = {"bags","baggage","banner","box","cl","cloths","mobile"};
+//    auto res = searchSuggestions(repo, "clp");
+//     res = searchSuggestions(repo, "cr");
 //    cout << solution->isValid("[()]")<<endl;
 //    cout << solution->isValid("[()")<<endl;
 //    cout << solution->isValid("([])");
