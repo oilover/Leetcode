@@ -2,6 +2,9 @@ package com.hl.network_delay;
 
 import java.util.*;
 
+/**
+ *
+ */
 class Solution {
     public int networkDelayTime(int[][] times, int n, int k) {
         int[] dist = new int[n];
