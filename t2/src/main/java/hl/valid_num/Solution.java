@@ -40,7 +40,7 @@ public class Solution {
             if (!isE(ch) && !Character.isDigit(ch) && ch!='.'&& !isSign(ch)) {
                 return false;
             }
-            if (i>0 && (ch=='+' || ch=='-')) { // 符号必须在首位
+            if (i>0 && (ch=='+' || ch=='-') && !isE(num[i-1])) { // 符号必须在首位
                 return false;
             }
             cnt.put(ch, cnt.getOrDefault(ch,0)+1);
@@ -52,7 +52,7 @@ public class Solution {
                     return false;
                 }
                 // 小数点前面或后面必须是数字
-                if (!(i>0 && Character.isDigit(num[i-1])) && !(i<n-1&&(isE(num[i+1])||Character.isDigit(num[i+1])))) {
+                if (!(i>0 && Character.isDigit(num[i-1])) && !(i<n-1&&Character.isDigit(num[i+1]))) {
                     return false;
                 }
                 if (cnt.getOrDefault('.',0)>1) {
@@ -63,7 +63,10 @@ public class Solution {
 //                }
             }
             if (isE(num[i])) {
-                if (i==0 ) { // 2.e3 +e 非法
+                if (i==0 ) { // 2.e3 +e 非法  e前面必须是.或数字
+                    return false;
+                }
+                if (isSign(num[i-1])) {
                     return false;
                 }
                 if (exp) { // e 只能出现一次
@@ -79,6 +82,8 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution s = new Solution();
+        System.out.println(s.isValid("005047e+6"));
+        System.out.println(s.isValid("+E3"));
         System.out.println(s.isValid(".e1"));
         System.out.println(s.isValid("46.e3"));
         System.out.println(s.isValid(".3"));

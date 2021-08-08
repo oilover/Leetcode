@@ -7,9 +7,9 @@ import java.util.*;
   */
 
 public class Main {
-    List<Integer> solve(int[] a) {
+    List<Integer> asteroidCollision(int[] a) {
         int n = a.length;
-        int[] dead = new int[n];
+//        int[] dead = new int[n];
         Stack<Integer> stack = new Stack<>();
 //        for (int x: a) {
 //            res.add(x);
@@ -26,7 +26,7 @@ public class Main {
                 stack.pop();
             }
             if (stack.isEmpty()) {
-                res.add(i);
+                stack.push(i);
             } else {
                 if (a[stack.peek()] == -x) {
                     stack.pop();
@@ -41,14 +41,19 @@ public class Main {
             res.set(i, a[res.get(i)]);
         }
         return res;
+//        int[] ts = new int[res.size()];
+//        for (int i=0;i<res.size();i++) {
+//            ts[i] = res.get(i);
+//        }
+//        return ts;
     }
 
     public static void main(String[] args) {
         Main s = new Main();
-        System.out.println(s.solve(new int[]{5,-6}));
-        System.out.println(s.solve(new int[]{-6,7}));
-        System.out.println(s.solve(new int[]{6,-6}));
-        System.out.println(s.solve(new int[]{-6,7,-2,-100}));
+        System.out.println(s.asteroidCollision(new int[]{5,-6}));
+        System.out.println(s.asteroidCollision(new int[]{-6,7}));
+        System.out.println(s.asteroidCollision(new int[]{6,-6}));
+        System.out.println(s.asteroidCollision(new int[]{-6,7,-2,-100}));
 
     }
 }

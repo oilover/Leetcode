@@ -85,6 +85,10 @@ class Solution {
 }
 public class Main {
     public static void main(String[] args) {
+        Integer i = new Integer(898);
+        System.out.println(i.hashCode());
+        i = 123;
+        System.out.println(i.hashCode());
         LinkedHashMap<Object, Object> map = new LinkedHashMap<>();
         Solution solution = new Solution();
         int[][] dependencies = new int[][]{{1,3},{2,3},{4,0}};
