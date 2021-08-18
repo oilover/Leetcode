@@ -80,7 +80,6 @@ public class Solution {
         l[0] = new ArrayList<>();
         l[0].add(8);
         l[1] = Arrays.asList(3,7);
-        Collections.
         System.out.println(l[0]);
         System.out.println(l[1]);
     }
