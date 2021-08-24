@@ -2,33 +2,39 @@ package hl;
 
 import java.util.*;
 
-class Graph {
-    private final Map<Integer,List<Integer>> neighbors;
-    Graph(int n) {
+class Graph<T extends Comparable<T>> {
+    private final Map<T, TreeSet<T>> neighbors;
+    Graph() {
         neighbors = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            neighbors.put(i, new ArrayList<>() );
+    }
+    Set<T> getNodes() {
+        return neighbors.keySet();
+    }
+    boolean exist(T u) {
+        return neighbors.containsKey(u);
+    }
+    void addEdge(T u, T v) {
+        addNode(u); addNode(v);
+        neighbors.get(u).add(v);
+//        neighbors.get(v).add(u);
+    }
+    void addNode(T u) {
+        if (!exist(u)) {
+            neighbors.put(u, new TreeSet<>());
         }
     }
-    void addEdge(int u, int v) {
-        neighbors.get(u).add(v);
-        neighbors.get(v).add(u);
-    }
-    void addNode(int u) {
-        neighbors.put(u, new ArrayList<>());
-    }
-    void removeNode(int u) {
+    void removeNode(T u) {
         neighbors.remove(u);
     }
-    void removeEdge(int u, int v) {
-//        neighbors.get(u).r
-    }
-    List<Integer> getNeighbors(int u) {
+    TreeSet<T> getNeighbors(T u) {
         return neighbors.get(u);
+    }
+    T removeMin(T u) {
+        return neighbors.get(u).pollFirst();
     }
 }
 class Solution {
-    private Graph graph;
+    private Graph<Integer> graph;
     void dfs(int u, int cur, boolean[] visited, List<Integer> block) {
         if (visited[u]) {
             return;
@@ -53,7 +59,7 @@ class Solution {
         parent[fu] = fv;
     }
     int[] solve(int n, int[][] dependencies) {
-        graph = new Graph(n);
+        graph = new Graph<>();
         parent = new int[n];
         for (int i = 0; i < n; i++) {
             parent[i] = i;

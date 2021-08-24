@@ -2,6 +2,8 @@ package tree.bst;
 
 import tree.TreeNode;
 
+import java.util.LinkedList;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -47,6 +49,7 @@ class Solution {
         if (isBST) {
             ans = Math.max(ans, n);
         }
+        new LinkedList<>().g
         int min = Math.min(u.val, Math.min(left.min, right.min));
         int max = Math.max(u.val, Math.max(left.max, right.max));
         return new Result(isBST, min, max, n);
