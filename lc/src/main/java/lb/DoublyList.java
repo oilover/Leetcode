@@ -38,9 +38,9 @@ class DoublyList {
     }
     public void insertHead(Node p) {
         Node t = head.next;
-        p.next = head.next;
+        p.next = t;t.pre = p;
         p.pre = head;
-        t.pre = p; head.next = p;
+         head.next = p;
     }
     public void remove(Node p) {
         p.pre.next = p.next;

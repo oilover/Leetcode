@@ -35,9 +35,9 @@ class Solution {
     }
 }
 class A implements Serializable {
-     private static class B {private static class C {}}
+     static class B {private  class C {}}
     protected void f() {
-         new A.B.C();
+//         new A.B.C();
         System.out.println("A pro..");
     }
 }
@@ -68,6 +68,9 @@ public class Main {
         }
     }
     public static void main(String[] args) {
+//        new A.B();
+        A a = new A();
+//        A.B b = a.new B();
         {
             C c = new C();
             c.f();
