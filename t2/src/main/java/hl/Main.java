@@ -2,38 +2,8 @@ package hl;
 
 import java.util.*;
 
-class Graph<T extends Comparable<T>> {
-    private final Map<T, TreeSet<T>> neighbors;
-    Graph() {
-        neighbors = new HashMap<>();
-    }
-    Set<T> getNodes() {
-        return neighbors.keySet();
-    }
-    boolean exist(T u) {
-        return neighbors.containsKey(u);
-    }
-    void addEdge(T u, T v) {
-        addNode(u); addNode(v);
-        neighbors.get(u).add(v);
-//        neighbors.get(v).add(u);
-    }
-    void addNode(T u) {
-        if (!exist(u)) {
-            neighbors.put(u, new TreeSet<>());
-        }
-    }
-    void removeNode(T u) {
-        neighbors.remove(u);
-    }
-    TreeSet<T> getNeighbors(T u) {
-        return neighbors.get(u);
-    }
-    T removeMin(T u) {
-        return neighbors.get(u).pollFirst();
-    }
-}
-class Solution {
+
+class Solution3 {
     private Graph<Integer> graph;
     void dfs(int u, int cur, boolean[] visited, List<Integer> block) {
         if (visited[u]) {
@@ -96,7 +66,7 @@ public class Main {
         i = 123;
         System.out.println(i.hashCode());
         LinkedHashMap<Object, Object> map = new LinkedHashMap<>();
-        Solution solution = new Solution();
+        Solution3 solution = new Solution3();
         int[][] dependencies = new int[][]{{1,3},{2,3},{4,0}};
         System.out.println(Arrays.toString(solution.solve(5, dependencies)));
     }
