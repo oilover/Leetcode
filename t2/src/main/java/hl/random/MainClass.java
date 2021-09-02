@@ -5,135 +5,64 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-class Graph<T extends Comparable<T>> {
-    private final Map<T, TreeSet<T>> neighbors;
-    Graph() {
-        neighbors = new HashMap<>();
-    }
-    Set<T> getNodes() {
-        return neighbors.keySet();
-    }
-    boolean exist(T u) {
-        return neighbors.containsKey(u);
-    }
-    void addEdge(T u, T v) {
-        addNode(u); addNode(v);
-        neighbors.get(u).add(v);
-//        neighbors.get(v).add(u);
-    }
-    void addNode(T u) {
-        if (!exist(u)) {
-            neighbors.put(u, new TreeSet<>());
-        }
-    }
-    void removeNode(T u) {
-        neighbors.remove(u);
-    }
-    TreeSet<T> getNeighbors(T u) {
-        return neighbors.get(u);
-    }
-    T removeMin(T u) {
-        return neighbors.get(u).pollFirst();
-    }
-}
 
 class Solution {
-    private Graph<String> graph;
-    List<List<String>> tickets;
-    HashSet<String> visited;
-    boolean dfs(String u, LinkedList<String> res) {
-        res.add(u);
-        if (res.size()==tickets.size()+1) {
-            return true;
+    private int m,n;
+    private PriorityQueue<int[]> pq;
+    private HashSet<Integer> hs;
+    void getNxt(int[] a, int[] b, int i, int j) {
+        if (i==m) {
+            j++;
+            i=0;
         }
-        for (String v: graph.getNeighbors(u)) {
-            String edge = u+" "+v;
-            if (!visited.contains(edge)) {
-                visited.add(edge);
-                if (dfs(v, res)) {
-                    return true;
-                }
-                res.removeLast();
-                visited.remove(edge);
+        if (j==n) {
+            i++;
+            j=0;
+        }
+        if (i<m&&j<n) {
+            int t = i*n+j;
+            if (!hs.contains(t)) {
+                hs.add(t);
+                pq.add(new int[]{a[i]+b[j],i,j});
             }
         }
-        return false;
     }
-    public List<String> findItinerary(List<List<String>> tickets) {
-        this.tickets = tickets;
-        graph = new Graph<>();
-        LinkedList<String> res = new LinkedList<>();
-        for (List<String> ticket:tickets) {
-            graph.addEdge(ticket.get(0), ticket.get(1));
+    public List<List<Integer>> kSmallestPairs(int[] a, int[] b, int k) {
+        pq = new PriorityQueue<>((x,y)->x[0]-y[0]);
+        hs = new HashSet<>();
+        List<List<Integer>> res = new ArrayList<>();
+        m = a.length; n = b.length;
+        if (m==0||n==0) {
+            return res;
         }
-        HashMap<String, Integer> cnt = new HashMap<>();
-        for (String loc: graph.getNodes()) {
-            cnt.put(loc, 0);
+        pq.add(new int[]{a[0]+b[0],0,0});
+        int i=0,j=0;
+        hs.add(0);
+        while (res.size()<k&&!pq.isEmpty()) {
+            int[] cur = pq.poll();
+            i = cur[1]; j = cur[2];
+            res.add(Arrays.asList(a[i],b[j]));
+            if (i==m-1&&j==n-1) {
+                break;
+            }
+            getNxt(a,b,i+1,j);
+            getNxt(a,b,i,j+1);
         }
-        String cur = "JFK";
-        visited = new HashSet<>();
-        dfs(cur, res);
         return res;
     }
 }
-
 public class MainClass {
-//    public static String[] stringToStringArray(String input) {
-//        JsonArray jsonArray = JsonArray.readFrom(line);
-//        String[] arr = new String[jsonArray.size()];
-//        for (int i = 0; i < arr.length; i++) {
-//            arr[i] = jsonArray.get(i).asString();
-//        }
-//        return arr;
-//    }
-//
-//    public static List<List<String>> stringToString2dArray(String input) {
-//        JsonArray jsonArray = JsonArray.readFrom(input);
-//        if (jsonArray.size() == 0) {
-//            return new ArrayList<List<String>>();
-//        }
-//        List<List<String>> list = new ArrayList<>(jsonArray.size());
-//        for (int i = 0; i < jsonArray.size(); i++) {
-//            JsonArray cols = jsonArray.get(i).asArray();
-//            list.add(stringToStringList(cols.toString()));
-//        }
-//        return list;
-//    }
-//
-//    public static List<List<String>> stringToString2dArray(String input) {
-//        JsonArray jsonArray = JsonArray.readFrom(input);
-//        if (jsonArray.size() == 0) {
-//            return new ArrayList<List<String>>();
-//        }
-//        List<List<String>> list = new ArrayList<>(jsonArray.size());
-//        for (int i = 0; i < jsonArray.size(); i++) {
-//            JsonArray cols = jsonArray.get(i).asArray();
-//            list.add(stringToStringList(cols.toString()));
-//        }
-//        return list;
-//    }
-//    public static String stringListToString(List<String> stringList) {
-//        StringBuilder sb = new StringBuilder("[");
-//        for (String item : stringList) {
-//            sb.append(item);
-//            sb.append(",");
-//        }
-//
-//        sb.setCharAt(sb.length() - 1, ']');
-//        return sb.toString();
-//    }
-//
-//    public static void main(String[] args) throws IOException {
-//        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-//        String line;
-//        while ((line = in.readLine()) != null) {
-//            List<List<String>> tickets = stringToString2dList(line);
-//
-//            List<String> ret = new Solution().findItinerary(tickets);
-//
-//            String out = stringListToString(ret);
-//
-//            System.out.print(out);
-//        }
-//    }
+    public static void main(String[] args) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>((x,y)->x[0]-y[0]);
+        pq.add(new int[]{2,3});
+        pq.add(new int[]{1,3});
+        String st = "cdbcaad";
+        System.out.println(Arrays.toString(st.split("[ab]+")));
+        Solution s = new Solution();
+        System.out.println(s.kSmallestPairs(new int[]{1,1,2}, new int[]{1,1,3}, 10));
+        System.out.println(s.kSmallestPairs(new int[]{1,2}, new int[]{3}, 3));
+        System.out.println(s.kSmallestPairs(new int[]{1,7,11}, new int[]{2,4,6}, 4));
+//        System.out.println(s.kSmallestPairs(new int[]{1}, new int[]{2}, 1));
+//        System.out.println(s.kSmallestPairs(new int[]{1,2}, new int[]{-3,9}, 4));
+    }
 }
