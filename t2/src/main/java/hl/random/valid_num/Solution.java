@@ -1,4 +1,4 @@
-package hl.valid_num;
+package hl.random.valid_num;
 
 import java.util.HashMap;
 

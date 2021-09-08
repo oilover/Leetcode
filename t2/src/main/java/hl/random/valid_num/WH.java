@@ -1,9 +1,8 @@
-package hl.valid_num;
+package hl.random.valid_num;
 
 
 import java.lang.ref.SoftReference;
-import java.util.Random;
-import java.util.WeakHashMap;
+import java.util.*;
 
 public class WH {
     public static void main(String[] args) throws InterruptedException {
@@ -11,6 +10,10 @@ public class WH {
         SoftReference<byte[]> softReference2=new SoftReference<>(new byte[1024*1024*10]);
         System.out.println(softReference.get());
         System.gc(); Thread.sleep(1000);
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        List<Integer> l = new ArrayList<>(pq);
+        TreeMap<String,Integer> tm = new TreeMap<>();
+        Queue q = new LinkedList();
 //        System.out.println(softReference.get());
 //        byte[] bytes=new byte[1024*1024*10];
         System.out.println(softReference2.get());

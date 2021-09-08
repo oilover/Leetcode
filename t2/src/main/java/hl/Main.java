@@ -64,6 +64,7 @@ public class Main {
         Integer i = new Integer(898);
         System.out.println(i.hashCode());
         i = 123;
+        String s = " f";
         System.out.println(i.hashCode());
         LinkedHashMap<Object, Object> map = new LinkedHashMap<>();
         Solution3 solution = new Solution3();

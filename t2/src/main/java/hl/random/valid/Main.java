@@ -1,4 +1,4 @@
-package hl.valid;
+package hl.random.valid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
