@@ -1,13 +1,14 @@
 package hl.t3;
 
 import java.util.Random;
+import java.util.concurrent.locks.ReentrantLock;
 
 class Solution {
     byte[] encode(int n) {
         byte[] res = new byte[4];
         for (int i = 0; i < 4; i++) {
             res[3 - i] = (byte) (n & 255);
-            n >>= 8;
+            n >>>= 8;
         }
         return res;
     }
@@ -37,12 +38,13 @@ public class Main {
 
     public static void main(String[] args) {
         for (int n = 1; n < 12; n++) {
-            System.out.println(n + steps(n));
+//            String.join()
+//            System.out.println(n + " " + steps(n));
         }
         Solution s = new Solution();
         Random r = new Random();
         for (int i = 0; i < 10; i++) {
-            int x = r.nextInt((int) 1e9);
+            int x = r.nextInt((int) 1e8);
             System.out.println(x + " " + s.decode(s.encode(x)));
         }
 //        System.out.println(ste);

@@ -52,7 +52,11 @@ class Queue:
             remove(cur)
         return res
 
-
+def test(n):
+    for i in range(n):
+        yield i*i
+for x in test(5): print(x)
+print(dir(Queue()))
 q = Queue()
 q.push(2)
 q.push(3)

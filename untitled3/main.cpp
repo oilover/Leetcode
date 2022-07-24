@@ -103,18 +103,64 @@ vector<vector<string>> searchSuggestions(vector<string> repository, string custo
     return trie->query(customerQuery);
 }
 
-int main() {
-//    Singleton *s = Singleton::getInstance();
-//    std::cout << s << std::endl;
-//    s = Singleton::getInstance();
-//    std::cout << s << std::endl;
-    Solution *solution = new Solution();
-    solution->maxCompatibilitySum()
-//    vector<string> repo = {"bags","baggage","banner","box","cl","cloths","mobile"};
-//    auto res = searchSuggestions(repo, "clp");
-//     res = searchSuggestions(repo, "cr");
-//    cout << solution->isValid("[()]")<<endl;
-//    cout << solution->isValid("[()")<<endl;
-//    cout << solution->isValid("([])");
+#include <stdio.h>
+
+int main(int argc, char * argv[])
+{
+    
+    if (argc != 3)
+    {
+        printf("Usage: %s <input filename> <output filename>\n", argv[0]);
+        return 0;
+    }
+
+    FILE* fin;
+
+    fin = fopen(argv[1], "rb");
+
+    if (fin == NULL)
+    {
+        printf("Can not open %s\n", argv[1]);
+        return -1;
+    }
+
+    FILE* fout;
+
+    fout = fopen(argv[2], "wb");
+
+    if (fout == NULL)
+    {
+        printf("Can not open %s\n", argv[2]);
+        fclose(fin);
+        return -1;
+    }
+
+    while (!feof(fin))
+    {
+        unsigned char b;
+
+        b = fgetc(fin);
+
+        fputc(b ^ 0xDC, fout);
+    }
+
+    fclose(fin);
+    fclose(fout);
+
     return 0;
 }
+//int main() {
+////    Singleton *s = Singleton::getInstance();
+////    std::cout << s << std::endl;
+////    s = Singleton::getInstance();
+////    std::cout << s << std::endl;
+//    Solution *solution = new Solution();
+//    solution->maxCompatibilitySum()
+////    vector<string> repo = {"bags","baggage","banner","box","cl","cloths","mobile"};
+////    auto res = searchSuggestions(repo, "clp");
+////     res = searchSuggestions(repo, "cr");
+////    cout << solution->isValid("[()]")<<endl;
+////    cout << solution->isValid("[()")<<endl;
+////    cout << solution->isValid("([])");
+//    return 0;
+//}
